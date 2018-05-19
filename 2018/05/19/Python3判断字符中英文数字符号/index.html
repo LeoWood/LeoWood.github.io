@@ -56,7 +56,7 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
 
 
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/stark.ico?v=5.1.4">
 
 
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="python文本处理," />
+  <meta name="keywords" content="Python,文本处理," />
 
 
 
@@ -80,14 +80,14 @@
 
 
 <meta name="description" content="第一篇博客，写一下关于Python3中字符中英文数字符号的判断。">
-<meta name="keywords" content="python文本处理">
+<meta name="keywords" content="Python,文本处理">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Python3判断字符中英文数字符号">
 <meta property="og:url" content="http://yoursite.com/2018/05/19/Python3判断字符中英文数字符号/index.html">
 <meta property="og:site_name" content="潜沉涵泳">
 <meta property="og:description" content="第一篇博客，写一下关于Python3中字符中英文数字符号的判断。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-18T16:45:33.894Z">
+<meta property="og:updated_time" content="2018-05-19T02:43:18.592Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python3判断字符中英文数字符号">
 <meta name="twitter:description" content="第一篇博客，写一下关于Python3中字符中英文数字符号的判断。">
@@ -147,7 +147,7 @@
 
   <div class="container sidebar-position-right page-post-detail">
     <div class="headband"></div>
-    <a href="https://github.com/LeoWood"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
+    <a href="https://github.com/LeoWood" class="github-corner" aria-label="View source on Github"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#fff; color:#151513; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
@@ -267,7 +267,7 @@
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/19/Python3判断字符中英文数字符号/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Liu Huan">
+      <meta itemprop="name" content="Leo Wood">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/hepburn.png">
     </span>
@@ -338,7 +338,7 @@
 <p>这里使用的u’u4e00’在Python3中行不通，正确的写法应该是：</p>
  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">is_chinese</span><span class="params">(char)</span>:</span></span><br><span class="line">   <span class="keyword">if</span> char &gt;= <span class="string">'\u4e00'</span> <span class="keyword">and</span> char &lt;= <span class="string">'\u9fa5'</span>:</span><br><span class="line">           <span class="keyword">return</span> <span class="keyword">True</span></span><br><span class="line">   <span class="keyword">else</span>:</span><br><span class="line">           <span class="keyword">return</span> <span class="keyword">False</span></span><br></pre></td></tr></table></figure>
 <p>完整代码如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"># -*- coding: utf-8 -*-</span><br><span class="line"># @Date    : 2018-05-18 21:59:40</span><br><span class="line"># @Author  : Liu Huan (liuhuan@mail.las.ac.cn)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def is_chinese(char):</span><br><span class="line">        # #判断一个字符是否为中文</span><br><span class="line">        if char &gt;= &apos;\u4e00&apos; and char &lt;= &apos;\u9fa5&apos;:</span><br><span class="line">                return True</span><br><span class="line">        else:</span><br><span class="line">                return False</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def is_alphabet(char):</span><br><span class="line">        # 判断字符是否为英文字母</span><br><span class="line">        if (char &gt;= &apos;\u0041&apos; and char &lt;= &apos;\u005a&apos;) or (char &gt;= &apos;\u0061&apos; and char &lt;= &apos;\u007a&apos;):</span><br><span class="line">                return True</span><br><span class="line">        else:</span><br><span class="line">                return False</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def is_number(char):</span><br><span class="line">        # 判断字符是否为数字</span><br><span class="line">        if char &gt;= &apos;\u0030&apos; and char &lt;= &apos;\u0039&apos;:</span><br><span class="line">                return True</span><br><span class="line">        else:</span><br><span class="line">                return False</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def is_other(uchar):</span><br><span class="line">        # 判断字符是否非汉字，数字和英文字符</span><br><span class="line">        if not (is_chinese(uchar) or is_number(uchar) or is_alphabet(uchar)):</span><br><span class="line">                return True</span><br><span class="line">        else:</span><br><span class="line">                return False</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">if __name__ == &apos;__main__&apos;:</span><br><span class="line">	print(is_chinese(&quot;&quot;))</span><br><span class="line">        string = &apos;程序共43行，判断char属性&apos;</span><br><span class="line">        for s in string:</span><br><span class="line">                if is_alphabet(s):</span><br><span class="line">                        print(&apos;英文&apos;)</span><br><span class="line">                if is_number(s):</span><br><span class="line">                        print(&apos;数字&apos;)</span><br><span class="line">                if is_chinese(s):</span><br><span class="line">                        print(&apos;中文&apos;)</span><br><span class="line">                if is_other(s):</span><br><span class="line">                        print(&apos;其他&apos;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment"># @Date    : 2018-05-18 21:59:40</span></span><br><span class="line"><span class="comment"># @Author  : Liu Huan (liuhuan@mail.las.ac.cn)</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">is_chinese</span><span class="params">(char)</span>:</span></span><br><span class="line">        <span class="comment"># #判断一个字符是否为中文</span></span><br><span class="line">        <span class="keyword">if</span> char &gt;= <span class="string">'\u4e00'</span> <span class="keyword">and</span> char &lt;= <span class="string">'\u9fa5'</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">True</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">False</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">is_alphabet</span><span class="params">(char)</span>:</span></span><br><span class="line">        <span class="comment"># 判断字符是否为英文字母</span></span><br><span class="line">        <span class="keyword">if</span> (char &gt;= <span class="string">'\u0041'</span> <span class="keyword">and</span> char &lt;= <span class="string">'\u005a'</span>) <span class="keyword">or</span> (char &gt;= <span class="string">'\u0061'</span> <span class="keyword">and</span> char &lt;= <span class="string">'\u007a'</span>):</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">True</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">False</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">is_number</span><span class="params">(char)</span>:</span></span><br><span class="line">        <span class="comment"># 判断字符是否为数字</span></span><br><span class="line">        <span class="keyword">if</span> char &gt;= <span class="string">'\u0030'</span> <span class="keyword">and</span> char &lt;= <span class="string">'\u0039'</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">True</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">False</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">is_other</span><span class="params">(uchar)</span>:</span></span><br><span class="line">        <span class="comment"># 判断字符是否非汉字，数字和英文字符</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> (is_chinese(uchar) <span class="keyword">or</span> is_number(uchar) <span class="keyword">or</span> is_alphabet(uchar)):</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">True</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">False</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">	print(is_chinese(<span class="string">""</span>))</span><br><span class="line">        string = <span class="string">'程序共43行，判断char属性'</span></span><br><span class="line">        <span class="keyword">for</span> s <span class="keyword">in</span> string:</span><br><span class="line">                <span class="keyword">if</span> is_alphabet(s):</span><br><span class="line">                        print(<span class="string">'英文'</span>)</span><br><span class="line">                <span class="keyword">if</span> is_number(s):</span><br><span class="line">                        print(<span class="string">'数字'</span>)</span><br><span class="line">                <span class="keyword">if</span> is_chinese(s):</span><br><span class="line">                        print(<span class="string">'中文'</span>)</span><br><span class="line">                <span class="keyword">if</span> is_other(s):</span><br><span class="line">                        print(<span class="string">'其他'</span>)</span><br></pre></td></tr></table></figure>
 <p>更多，访问 <a href="https://github.com/LeoWood/AuxiliaryScripts" target="_blank" rel="noopener">GitHub-AuxiliaryScripts</a>.</p>
 
       
@@ -357,7 +357,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/python文本处理/" rel="tag"># python文本处理</a>
+            <a href="/tags/Python/" rel="tag"># Python</a>
+          
+            <a href="/tags/文本处理/" rel="tag"># 文本处理</a>
           
         </div>
       
@@ -379,6 +381,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/19/Python爬虫-抓取大数据岗位招聘信息（51job为例）/" rel="prev" title="Python爬虫 抓取大数据岗位招聘信息（51job为例）">
+                Python爬虫 抓取大数据岗位招聘信息（51job为例） <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -437,10 +443,10 @@
             
               <img class="site-author-image" itemprop="image"
                 src="/images/hepburn.png"
-                alt="Liu Huan" />
+                alt="Leo Wood" />
             
-              <p class="site-author-name" itemprop="name">Liu Huan</p>
-              <p class="site-description motion-element" itemprop="description"></p>
+              <p class="site-author-name" itemprop="name">Leo Wood</p>
+              <p class="site-description motion-element" itemprop="description">Dance in the rain.</p>
           </div>
 
           <nav class="site-state motion-element">
@@ -450,7 +456,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -463,7 +469,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -504,7 +510,7 @@
               <ul class="links-of-blogroll-list">
                 
                   <li class="links-of-blogroll-item">
-                    <a href="https://www.jianshu.com/u/68f0c30bb0f1" title="JianShu" target="_blank">JianShu</a>
+                    <a href="https://www.jianshu.com/u/68f0c30bb0f1" title="简书" target="_blank">简书</a>
                   </li>
                 
               </ul>
@@ -535,7 +541,7 @@
 <!--  <span class="with-love">
     <i class="fa fa-user"></i>
   </span>-->
-  <span class="author" itemprop="copyrightHolder">❤ Liu Huan</span>
+  <span class="author" itemprop="copyrightHolder">❤ Leo Wood</span>
 
   
 </div>

@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="潜沉涵泳">
 <meta property="og:description" content="第一篇博客，写一下关于Python3中字符中英文数字符号的判断。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-21T08:42:32.238Z">
+<meta property="og:updated_time" content="2018-05-21T08:57:02.594Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python3判断字符中英文数字符号">
 <meta name="twitter:description" content="第一篇博客，写一下关于Python3中字符中英文数字符号的判断。">
@@ -384,7 +384,7 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">is_number</span><span class="params">(char)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> char &gt;= <span class="string">'\u0030'</span> <span class="keyword">and</span> char &lt;= <span class="string">'\u0039'</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">True</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">False</span></span><br></pre></td></tr></table></figure>
 <p>判断字符是否非汉字，数字和英文字符：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">is_other</span><span class="params">(uchar)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> (is_chinese(uchar) <span class="keyword">or</span> is_number(uchar) <span class="keyword">or</span> is_alphabet(uchar)):</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">True</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">False</span></span><br></pre></td></tr></table></figure>
-<p>完整代码，移步 <a href="https://github.com/LeoWood/AuxiliaryScripts" target="_blank" rel="noopener">GitHub-AuxiliaryScripts-DistinguishChars.py</a>.</p>
+<p>完整代码=&gt;<a href="https://github.com/LeoWood/AuxiliaryScripts" target="_blank" rel="noopener">GitHub-AuxiliaryScripts-DistinguishChars.py</a>.</p>
 
       
     </div>

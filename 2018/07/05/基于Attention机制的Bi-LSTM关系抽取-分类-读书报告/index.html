@@ -79,18 +79,23 @@
 
 
 
-<meta name="description" content="课上听了Attention机制相关的内容，非常感兴趣，认为这是一个非常值得学习研究的内容。于是找了相关的论文进行阅读，这里总结一下Peng Zhou等发表在ACL2016的一篇论文《Attention-Based Bidirectional Long Short-Term Memory Networks forRelation Classification》。论文主要介绍了在关系分类任务中应用双向">
+<meta name="description" content="本人DL4NLP课程作业，摘录于此，拒绝转载，谢谢。">
 <meta name="keywords" content="NLP，Attention,Bi-LSTM,关系抽取">
 <meta property="og:type" content="article">
 <meta property="og:title" content="基于Attention机制的Bi-LSTM关系抽取(分类)读书报告">
 <meta property="og:url" content="http://yoursite.com/2018/07/05/基于Attention机制的Bi-LSTM关系抽取-分类-读书报告/index.html">
 <meta property="og:site_name" content="依依东望">
-<meta property="og:description" content="课上听了Attention机制相关的内容，非常感兴趣，认为这是一个非常值得学习研究的内容。于是找了相关的论文进行阅读，这里总结一下Peng Zhou等发表在ACL2016的一篇论文《Attention-Based Bidirectional Long Short-Term Memory Networks forRelation Classification》。论文主要介绍了在关系分类任务中应用双向">
+<meta property="og:description" content="本人DL4NLP课程作业，摘录于此，拒绝转载，谢谢。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-09T01:51:57.905Z">
+<meta property="og:image" content="http://yoursite.com/images/Att-BiLSTM-model.png">
+<meta property="og:image" content="http://yoursite.com/images/Att-BiLSTM-cla1.png">
+<meta property="og:image" content="http://yoursite.com/images/Att-BiLSTM-cla2.png">
+<meta property="og:image" content="http://yoursite.com/images/Att-BiLSTM-results.png">
+<meta property="og:updated_time" content="2018-07-09T03:31:57.138Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="基于Attention机制的Bi-LSTM关系抽取(分类)读书报告">
-<meta name="twitter:description" content="课上听了Attention机制相关的内容，非常感兴趣，认为这是一个非常值得学习研究的内容。于是找了相关的论文进行阅读，这里总结一下Peng Zhou等发表在ACL2016的一篇论文《Attention-Based Bidirectional Long Short-Term Memory Networks forRelation Classification》。论文主要介绍了在关系分类任务中应用双向">
+<meta name="twitter:description" content="本人DL4NLP课程作业，摘录于此，拒绝转载，谢谢。">
+<meta name="twitter:image" content="http://yoursite.com/images/Att-BiLSTM-model.png">
 
 
 
@@ -362,7 +367,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  938
+                  2,559
                 </span>
               
 
@@ -378,7 +383,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  3
+                  9
                 </span>
               
             </div>
@@ -399,8 +404,11 @@
       
 
       
-        <p>课上听了Attention机制相关的内容，非常感兴趣，认为这是一个非常值得学习研究的内容。于是找了相关的论文进行阅读，这里总结一下Peng Zhou等发表在ACL2016的一篇论文《Attention-Based Bidirectional Long Short-Term Memory Networks for<br>Relation Classification》。论文主要介绍了在关系分类任务中应用双向LSTM神经网络模型并加入Attention机制，从而避免了传统工作中复杂的特征工程，并在该任务中取得比较优秀的效果。</p>
+        <blockquote>
+<p>本人DL4NLP课程作业，摘录于此，拒绝转载，谢谢。</p>
+</blockquote>
 <a id="more"></a>
+<p>课上听了Attention机制相关的内容，非常感兴趣，认为这是一个非常值得学习研究的内容。于是找了相关的论文进行阅读，这里总结一下Peng Zhou等发表在ACL2016的一篇论文《Attention-Based Bidirectional Long Short-Term Memory Networks for<br>Relation Classification》。论文主要介绍了在关系分类任务中应用双向LSTM神经网络模型并加入Attention机制，从而避免了传统工作中复杂的特征工程，并在该任务中取得比较优秀的效果。</p>
 <h3 id="研究背景"><a href="#研究背景" class="headerlink" title="研究背景"></a>研究背景</h3><p>关系抽取（分类）是自然语言处理中一个重要的任务，也即从自然语言文本中提取两个实体之间的语义关系。关系抽取属于信息抽取的一个部分。信息激增的时代，快速、准确获取关键信息的需求也日益激增，相比于传统的信息检索，信息抽取能够快速、准确提取出海量非结构化信息中的结构化知识，它也逐渐成为搜索引擎发展的方向。而关系抽取同命名实体识别、事件抽取等任务一起，都是信息抽取的一部分或者中间过程，可应用于结构化知识抽取、知识图谱构建、自动问答系统构建等。</p>
 <h3 id="研究动机"><a href="#研究动机" class="headerlink" title="研究动机"></a>研究动机</h3><p>关系抽取从本质上看是一个多分类问题，对于这样一个问题来说最重要的工作无非特征的提取和分类模型的选择。传统的方法中，大多数研究依赖于一些现有的词汇资源（例如WordNet）、NLP系统或一些手工提取的特征。这样的方法可能导致计算复杂度的增加，并且特征提取工作本身会耗费大量的时间和精力，特征提取质量的对于实验的结果也有很大的影响。因此，这篇论文从这一角度出发，提出一个基于Attention机制的双向LSTM神经网络模型进行关系抽取研究，Attention机制能够自动发现那些对于分类起到关键作用的词，使得这个模型可以从每个句子中捕获最重要的语义信息，它不依赖于任何外部的知识或者NLP系统。</p>
 <h3 id="解决思路"><a href="#解决思路" class="headerlink" title="解决思路"></a>解决思路</h3><ul>
@@ -413,15 +421,68 @@
 <li>Attention层：生成一个权重向量，通过与这个权重向量相乘，使每一次迭代中的词汇级的特征合并为句子级的特征。</li>
 <li>输出层：将句子级的特征向量用于关系分类</li>
 </ul>
+<p>模型结构如下图：</p>
+<p><img src="\images\Att-BiLSTM-model.png" alt=""></p>
 </li>
 <li><p><strong>词向量层</strong></p>
-<p>对于一个给定的包含T个词的句子S: $S={x_1,x_2,…,x_T}$。每一个词$x_i$都是转换为一个实数向量$e_i$。对于S中的每一个词来说，首先存在一个词向量矩阵：$W^(wrd)\in\mathbb{R}^(d^w|V|)$，其中V是一个固定大小的词汇表，$d^w$是词向量的维度，是一个由用户自定义的超参数，$W^(wrd)$则是通过训练学习到的一个参数矩阵。使用这个词向量矩阵，可以将每个词转化为其词向量的表示： </p>
-<p>$$e_i=W^(wrd)v^i$$</p>
-<p>其中，$v^i$是一个大小为|V|的one-hot向量，在下表为$ei$处为1，其他位置为0。于是，句子S将被转化为一个实数矩阵：$emb_s = {e_1, e_2, …, e_T}$，并传递给模型的下一层。 </p>
+<p>对于一个给定的包含T个词的句子S: $S={x_1,x_2,…,x_T}$。每一个词$x_i$都是转换为一个实数向量$e_i$。对于S中的每一个词来说，首先存在一个词向量矩阵：$W^{wrd}\in\mathbb{R}^{d^w|V|}$，其中V是一个固定大小的词汇表，$d^w$是词向量的维度，是一个由用户自定义的超参数，$W^{wrd}$则是通过训练学习到的一个参数矩阵。使用这个词向量矩阵，可以将每个词转化为其词向量的表示： </p>
+<p>$$e_i=W^{wrd}v^i$$</p>
+<p>其中，$v^i$是一个大小为$ |V|$ 的one-hot向量，在下表为$ei$处为1，其他位置为0。于是，句子S将被转化为一个实数矩阵：$$emb_s = {e_1, e_2, …, e_T}$，并传递给模型的下一层。 </p>
 </li>
-<li></li>
+<li><p><strong>双向LSTM</strong></p>
+<p>LSTM最早由Hochreiter和Schmidhuber (1997)提出，为了解决循环神经网络中的梯度消失问题。主要思想是引入门机制，从而能够控制每一个LSTM单元保留的历史信息的程度以及记忆当前输入的信息，保留重要特征，丢弃不重要的特征。这篇论文采用了Graves等人(2013)提出的一个变体，将上一个细胞状态同时引入到输入门、遗忘门以及新信息的计算当中。该LSTM模型也同样包含四个部分： </p>
+<ul>
+<li><p>输入门。包含了当前输入、上一个隐状态、上一个细胞状态，组成权重矩阵，以决定加入多少新信息 ：</p>
+<p>$$i_t=\sigma(W_{xi}x_t+W_{hi}h_{t-1}+W_{ci}c_{t-1}+b_i)$$</p>
+</li>
+<li><p>遗忘门。同上，决定丢弃多少旧信息 ：</p>
+<p>$$f_t=\sigma(W_{xf}x_t+W_{hf}h_{t-1}+W_{cf}c_{t-1}+b_f)$$</p>
+</li>
+<li><p>细胞状态。包含了上一个细胞状态以及基于当前输入和上个隐状态信息生成的新信息 ：</p>
+<p>$$c_t=i_tg_t+f_tc_{t-1}$$</p>
+<p>$$g_t=tanh(W_{xc}x_t+W_{hc}h_{t-1}+W_{cc}c_{t-1}+b_c)$$</p>
+</li>
+<li><p>输出门。包含了当前输入、上一个隐状态、当前细胞状态，组成权重矩阵，以决定哪些信息被输出 ：</p>
+<p>$$o_t=\sigma(W_{xo}x_t+W_{ho}h_{t-1}+W_{co}c_t+b_o)$$</p>
+</li>
 </ul>
-<h3 id="试验过程和结果"><a href="#试验过程和结果" class="headerlink" title="试验过程和结果"></a>试验过程和结果</h3><h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3>
+<p>最终，输出的当前隐状态则由当前细胞状态乘以输出们的权重矩阵得到:</p>
+<p>$$h_t=o_ttanh(c_t)$$</p>
+<p>对于序列建模的任务来说，每一个时刻的未来信息和历史信息同等重要，标准的LSTM模型按其顺序并不能捕获未来的信息。因而这篇论文采用了双向LSTM模型，在原有的正向LSTM网络层上增加一层反向的LSTM层，可以表示成：<br>$$h_i=[\vec h_i \bigoplus {\operatorname*{h_i}\limits^\gets}]$$</p>
+</li>
+<li><p><strong>Attention机制</strong></p>
+<p>将LSTM层输入的向量集合表示为H：$[h_1, h_2, …, h_T]$。其Attention层得到的权重矩阵由下面的方式得到 ：</p>
+<p>$$M=tanh(H)$$</p>
+<p>$$\alpha=softmax(w^TM)$$</p>
+<p>$$r=H\alpha^T$$</p>
+<p>其中，$H\in\mathbb{R}^{d^w\times T}$，$d^w$为词向量的维度，$w^T$是一个训练学习得到的参数向量的转置。最终用以分类的句子将表示如下 :<br>$$ h^*=tanh(r)$$</p>
+</li>
+<li><p><strong>分类</strong></p>
+<p>使用一个softmax分类器来预测标签$\hat y$ 。该分类器将上一层得到的隐状态作为输入:<br><img src="\images\Att-BiLSTM-cla1.png" alt=""><br><img src="\images\Att-BiLSTM-cla2.png" alt=""><br>成本函数采用正样本的负对数似然：<br>$$<br>J(\theta)=-\frac{1}{m}\sum^m_{i=1}t_ilog(y_i)+\lambda||\theta||^2_F<br>$$<br>其中$t\in \mathfrak{R}^m$为正样本的one-hot表示，$y\in \mathfrak{R}^m$为softmax估计出的每个类别的概率（m为类别个数），$\lambda$是L2正则化的超参数。这篇论文中使用了Dropout和L2正则化的组合以减轻过拟合的情况 。</p>
+</li>
+</ul>
+<h3 id="试验过程和结果"><a href="#试验过程和结果" class="headerlink" title="试验过程和结果"></a>试验过程和结果</h3><p>实验使用了SemEval-2010 Task 8数据集。该数据集包括9个双向的实体关系和一个无向的其他关系。共计10717个标注样本，其中8000个句子作为训练集，2717个句子作为测试集。使用了基于宏平均F1值的标准评价方法。</p>
+<p>为了与其他工作进行对比，文章还采用了与之相同的预训练的词向量进行词向量层的初始化。</p>
+<p>由于没有标准的开发集，这篇论文中作者随机选择了800个样本作为验证集以调整训练中的超参数。</p>
+<p>模型训练采用了AdaDelta优化方法，学习率为0.1，minibatch大小为10。经过测试，在词向量层，LSTM层和倒数第二层分别采用0.3，0.3，0.5的dropout时，效果最好。实验结果对比如下：</p>
+<p><img src="\images\Att-BiLSTM-results.png" alt=""></p>
+<p>可以发现，在这些实验中，这篇论文所使用的基于Attention机制的双向LSTM模型的结果好于绝大多数其他方法。仅次于Zhang等人(2015)提出的BLSTM方法，不过该方法是在加入了大量来自NLP系统和词汇资源的特征的前提下达到了84.3的F1值，而本篇论文中的方法则简单很多，也同样达到了84.0的F1值 。</p>
+<h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><p>这篇论文用最简单的方式，巧妙地在双向LSTM模型中加入Attention机制，用于关系抽取任务，避免了传统的任务中复杂的特征工程，大大简化了实验过程并得到相当不错的结果，也为相关的研究提供了可操作性的思路。</p>
+<p>由于数学基础还有所欠缺，其中一些细节部分的理解可能还存在一些偏差（尤其是作者所使用的LSTM的变体那一部分）。但是这篇论文的整体的逻辑十分清晰，紧紧围绕研究动机，向我们阐述了大道至简的观念。确实，整篇论文的思路十分简单，模型也一目了然，但是结果表现优秀。个人认为这也正是科学研究在不断地更新换代中所追求的目标：简单有效。</p>
+<p>另外，论文在一些表达中，可能还有值得改进的地方。例如关于LSTM层的阐述中，作者使用了大段地陈述加一堆公式的堆叠，其实增加了读者阅读的难度。在总结的过程中，我是结合课程中LSTM模型相关的讲解进行梳理，才有了比较清晰的理解。最后个人认为，论文的初衷在于简化实验过程，节省人力物力时间等，并同时取得较好的效果。那么其实有一些特征比如命名实体等是样本中本身就包含的，也不需要耗费太多的成本，模型是否还可以加入这样一些简单的特征，然后看是否对于结果有一个提升。从而可以在效果的提升与成本上取得一个平衡，也许是相对来说更优的结果。</p>
+<h4 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h4><blockquote>
+<p>Zhou P, Shi W, Tian J, et al. Attention-Based Bidirectional Long Short-Term Memory Networks for Relation Classification[C]// Meeting of the Association for Computational Linguistics. 2016:207-212. </p>
+</blockquote>
+<blockquote>
+<p>Sepp Hochreiter and J¨urgen Schmidhuber. 1997. Long short-term memory. Neural computation, 9(8):1735–1780.</p>
+</blockquote>
+<blockquote>
+<p>Alex Graves. 2013. Generating sequences with recurrent neural networks. arXiv preprint arXiv: 1308.0850.</p>
+</blockquote>
+<blockquote>
+<p>Shu Zhang, Dequan Zheng, Xinchen Hu, and Ming Yang. 2015. Bidirectional long short-term memory networks for relation classification.</p>
+</blockquote>
+
       
     </div>
     
@@ -633,7 +694,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#研究背景"><span class="nav-number">1.</span> <span class="nav-text">研究背景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#研究动机"><span class="nav-number">2.</span> <span class="nav-text">研究动机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决思路"><span class="nav-number">3.</span> <span class="nav-text">解决思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#试验过程和结果"><span class="nav-number">4.</span> <span class="nav-text">试验过程和结果</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结论"><span class="nav-number">5.</span> <span class="nav-text">结论</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#研究背景"><span class="nav-number">1.</span> <span class="nav-text">研究背景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#研究动机"><span class="nav-number">2.</span> <span class="nav-text">研究动机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决思路"><span class="nav-number">3.</span> <span class="nav-text">解决思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#试验过程和结果"><span class="nav-number">4.</span> <span class="nav-text">试验过程和结果</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结论"><span class="nav-number">5.</span> <span class="nav-text">结论</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#参考文献"><span class="nav-number">5.1.</span> <span class="nav-text">参考文献</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -670,7 +731,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">6.2k</span>
+    <span title="Site words total count">7.8k</span>
   
 </div>
 

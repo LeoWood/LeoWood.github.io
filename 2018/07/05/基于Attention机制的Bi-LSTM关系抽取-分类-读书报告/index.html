@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="NLP，Attention,Bi-LSTM,关系抽取," />
 
 
 
@@ -79,16 +79,18 @@
 
 
 
-<meta name="description" content="潜沉涵泳">
-<meta property="og:type" content="website">
-<meta property="og:title" content="依依东望">
-<meta property="og:url" content="http://yoursite.com/archives/index.html">
+<meta name="description" content="课上听了Attention机制相关的内容，非常感兴趣，认为这是一个非常值得学习研究的内容。于是找了相关的论文进行阅读，这里总结一下Peng Zhou等发表在ACL2016的一篇论文《Attention-Based Bidirectional Long Short-Term Memory Networks forRelation Classification》。论文主要介绍了在关系分类任务中应用双向">
+<meta name="keywords" content="NLP，Attention,Bi-LSTM,关系抽取">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于Attention机制的Bi-LSTM关系抽取(分类)读书报告">
+<meta property="og:url" content="http://yoursite.com/2018/07/05/基于Attention机制的Bi-LSTM关系抽取-分类-读书报告/index.html">
 <meta property="og:site_name" content="依依东望">
-<meta property="og:description" content="潜沉涵泳">
+<meta property="og:description" content="课上听了Attention机制相关的内容，非常感兴趣，认为这是一个非常值得学习研究的内容。于是找了相关的论文进行阅读，这里总结一下Peng Zhou等发表在ACL2016的一篇论文《Attention-Based Bidirectional Long Short-Term Memory Networks forRelation Classification》。论文主要介绍了在关系分类任务中应用双向">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-07-09T01:51:57.905Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="依依东望">
-<meta name="twitter:description" content="潜沉涵泳">
+<meta name="twitter:title" content="基于Attention机制的Bi-LSTM关系抽取(分类)读书报告">
+<meta name="twitter:description" content="课上听了Attention机制相关的内容，非常感兴趣，认为这是一个非常值得学习研究的内容。于是找了相关的论文进行阅读，这里总结一下Peng Zhou等发表在ACL2016的一篇论文《Attention-Based Bidirectional Long Short-Term Memory Networks forRelation Classification》。论文主要介绍了在关系分类任务中应用双向">
 
 
 
@@ -118,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/archives/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/07/05/基于Attention机制的Bi-LSTM关系抽取-分类-读书报告/"/>
 
 
 
 
 
-  <title>归档 | 依依东望</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>基于Attention机制的Bi-LSTM关系抽取(分类)读书报告 | 依依东望</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -143,7 +145,7 @@
     
   
 
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-right page-archive">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-right page-post-detail">
     <div class="headband"></div>
     <a href="https://github.com/LeoWood" class="github-corner" aria-label="View source on Github"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
 
@@ -258,259 +260,230 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
+  <div id="posts" class="posts-expand">
+    
 
-      <span class="archive-page-counter">
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/05/基于Attention机制的Bi-LSTM关系抽取-分类-读书报告/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Leo Wood">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/hepburn.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="依依东望">
+    </span>
+
+    
+      <header class="post-header">
+
         
         
+          <h1 class="post-title" itemprop="name headline">基于Attention机制的Bi-LSTM关系抽取(分类)读书报告</h1>
         
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-05T14:25:10+08:00">
+                2018-07-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
           
-        
-        嗯..! 目前共计 6 篇日志。 继续努力。
-      </span>
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/论文阅读/" itemprop="url" rel="index">
+                    <span itemprop="name">论文阅读</span>
+                  </a>
+                </span>
 
-      
-
-        
-        
-        
-
-        
+                
+                
+              
+            </span>
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2018">2018</h1>
-          </div>
-        
-        
 
-        
+          
+            
+          
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+          
+          
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/07/05/基于Attention机制的Bi-LSTM关系抽取-分类-读书报告/" itemprop="url">
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 浏览
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
               
-                <span itemprop="name">基于Attention机制的Bi-LSTM关系抽取(分类)读书报告</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  938
+                </span>
               
-            </a>
-        
-      </h2>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-07-05T14:25:10+08:00"
-              content="2018-07-05" >
-          07-05
-        </time>
-      </div>
+              
+                <span class="post-meta-divider">|</span>
+              
 
-    </header>
-  </article>
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  3
+                </span>
+              
+            </div>
+          
 
+          
 
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/06/13/Python-Pandas-构建共现矩阵/" itemprop="url">
-              
-                <span itemprop="name">Python Pandas 构建共现矩阵</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-06-13T10:49:54+08:00"
-              content="2018-06-13" >
-          06-13
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
 
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/05/21/Java调用Python脚本（Python3）/" itemprop="url">
-              
-                <span itemprop="name">Java调用Python脚本（Python3，Windows10系统）</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-05-21T16:04:35+08:00"
-              content="2018-05-21" >
-          05-21
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/05/19/Python爬虫-抓取大数据岗位招聘信息（51job为例）/" itemprop="url">
-              
-                <span itemprop="name">Python爬虫 抓取大数据岗位招聘信息（51job为例）</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-05-19T10:26:16+08:00"
-              content="2018-05-19" >
-          05-19
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
+        <p>课上听了Attention机制相关的内容，非常感兴趣，认为这是一个非常值得学习研究的内容。于是找了相关的论文进行阅读，这里总结一下Peng Zhou等发表在ACL2016的一篇论文《Attention-Based Bidirectional Long Short-Term Memory Networks for<br>Relation Classification》。论文主要介绍了在关系分类任务中应用双向LSTM神经网络模型并加入Attention机制，从而避免了传统工作中复杂的特征工程，并在该任务中取得比较优秀的效果。</p>
+<a id="more"></a>
+<h3 id="研究背景"><a href="#研究背景" class="headerlink" title="研究背景"></a>研究背景</h3><p>关系抽取（分类）是自然语言处理中一个重要的任务，也即从自然语言文本中提取两个实体之间的语义关系。关系抽取属于信息抽取的一个部分。信息激增的时代，快速、准确获取关键信息的需求也日益激增，相比于传统的信息检索，信息抽取能够快速、准确提取出海量非结构化信息中的结构化知识，它也逐渐成为搜索引擎发展的方向。而关系抽取同命名实体识别、事件抽取等任务一起，都是信息抽取的一部分或者中间过程，可应用于结构化知识抽取、知识图谱构建、自动问答系统构建等。</p>
+<h3 id="研究动机"><a href="#研究动机" class="headerlink" title="研究动机"></a>研究动机</h3><p>关系抽取从本质上看是一个多分类问题，对于这样一个问题来说最重要的工作无非特征的提取和分类模型的选择。传统的方法中，大多数研究依赖于一些现有的词汇资源（例如WordNet）、NLP系统或一些手工提取的特征。这样的方法可能导致计算复杂度的增加，并且特征提取工作本身会耗费大量的时间和精力，特征提取质量的对于实验的结果也有很大的影响。因此，这篇论文从这一角度出发，提出一个基于Attention机制的双向LSTM神经网络模型进行关系抽取研究，Attention机制能够自动发现那些对于分类起到关键作用的词，使得这个模型可以从每个句子中捕获最重要的语义信息，它不依赖于任何外部的知识或者NLP系统。</p>
+<h3 id="解决思路"><a href="#解决思路" class="headerlink" title="解决思路"></a>解决思路</h3><ul>
+<li><p><strong>模型结构</strong></p>
+<p>模型一共包括5层结构:</p>
+<ul>
+<li>输入层：将句子输入到模型中</li>
+<li>Embedding层：将每个词映射到低维空间</li>
+<li>LSTM层：使用双向LSTM从Embedding层获取高级特征</li>
+<li>Attention层：生成一个权重向量，通过与这个权重向量相乘，使每一次迭代中的词汇级的特征合并为句子级的特征。</li>
+<li>输出层：将句子级的特征向量用于关系分类</li>
+</ul>
+</li>
+<li><p><strong>词向量层</strong></p>
+<p>对于一个给定的包含T个词的句子S: $S={x_1,x_2,…,x_T}$。每一个词$x_i$都是转换为一个实数向量$e_i$。对于S中的每一个词来说，首先存在一个词向量矩阵：$W^(wrd)\in\mathbb{R}^(d^w|V|)$，其中V是一个固定大小的词汇表，$d^w$是词向量的维度，是一个由用户自定义的超参数，$W^(wrd)$则是通过训练学习到的一个参数矩阵。使用这个词向量矩阵，可以将每个词转化为其词向量的表示： </p>
+<p>$$e_i=W^(wrd)v^i$$</p>
+<p>其中，$v^i$是一个大小为|V|的one-hot向量，在下表为$ei$处为1，其他位置为0。于是，句子S将被转化为一个实数矩阵：$emb_s = {e_1, e_2, …, e_T}$，并传递给模型的下一层。 </p>
+</li>
+<li></li>
+</ul>
+<h3 id="试验过程和结果"><a href="#试验过程和结果" class="headerlink" title="试验过程和结果"></a>试验过程和结果</h3><h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3>
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/05/19/Python3判断字符中英文数字符号/" itemprop="url">
-              
-                <span itemprop="name">Python3判断字符中英文数字符号</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-05-19T00:02:48+08:00"
-              content="2018-05-19" >
-          05-19
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/05/17/hello-world/" itemprop="url">
-              
-                <span itemprop="name">Hello World</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-05-17T23:44:56+08:00"
-              content="2018-05-17" >
-          05-17
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/NLP，Attention/" rel="tag"><i class="fa fa-tag"></i> NLP，Attention</a>
+          
+            <a href="/tags/Bi-LSTM/" rel="tag"><i class="fa fa-tag"></i> Bi-LSTM</a>
+          
+            <a href="/tags/关系抽取/" rel="tag"><i class="fa fa-tag"></i> 关系抽取</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/06/13/Python-Pandas-构建共现矩阵/" rel="next" title="Python Pandas 构建共现矩阵">
+                <i class="fa fa-chevron-left"></i> Python Pandas 构建共现矩阵
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -518,6 +491,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -538,8 +515,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -637,6 +623,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#研究背景"><span class="nav-number">1.</span> <span class="nav-text">研究背景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#研究动机"><span class="nav-number">2.</span> <span class="nav-text">研究动机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决思路"><span class="nav-number">3.</span> <span class="nav-text">解决思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#试验过程和结果"><span class="nav-number">4.</span> <span class="nav-text">试验过程和结果</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结论"><span class="nav-number">5.</span> <span class="nav-text">结论</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -821,6 +823,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 

@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="教程,环境配置,Docker," />
 
 
 
@@ -79,16 +79,20 @@
 
 
 
-<meta name="description" content="潜沉涵泳">
-<meta property="og:type" content="website">
-<meta property="og:title" content="依依东望">
-<meta property="og:url" content="http://yoursite.com/archives/2018/07/index.html">
+<meta name="description" content="前期为了做实体识别，尝试调用DBpedia-spotlight API，发现API限制访问的情况很严重，只好考虑使用离线版。在谷歌找到了使用Docker创建本地版DBpedia-spotlight API的方法，于是开始探索在Windows Server 2012 R2 安装Docker。">
+<meta name="keywords" content="教程,环境配置,Docker">
+<meta property="og:type" content="article">
+<meta property="og:title" content="windows server 2012 r2 安装docker">
+<meta property="og:url" content="http://yoursite.com/2018/11/08/windows-server-2012-r2-安装docker/index.html">
 <meta property="og:site_name" content="依依东望">
-<meta property="og:description" content="潜沉涵泳">
+<meta property="og:description" content="前期为了做实体识别，尝试调用DBpedia-spotlight API，发现API限制访问的情况很严重，只好考虑使用离线版。在谷歌找到了使用Docker创建本地版DBpedia-spotlight API的方法，于是开始探索在Windows Server 2012 R2 安装Docker。">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/images/docker.png">
+<meta property="og:updated_time" content="2018-11-08T09:23:28.652Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="依依东望">
-<meta name="twitter:description" content="潜沉涵泳">
+<meta name="twitter:title" content="windows server 2012 r2 安装docker">
+<meta name="twitter:description" content="前期为了做实体识别，尝试调用DBpedia-spotlight API，发现API限制访问的情况很严重，只好考虑使用离线版。在谷歌找到了使用Docker创建本地版DBpedia-spotlight API的方法，于是开始探索在Windows Server 2012 R2 安装Docker。">
+<meta name="twitter:image" content="http://yoursite.com/images/docker.png">
 
 
 
@@ -118,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/archives/2018/07/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/11/08/windows-server-2012-r2-安装docker/"/>
 
 
 
 
 
-  <title>归档 | 依依东望</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>windows server 2012 r2 安装docker | 依依东望</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -143,7 +147,7 @@
     
   
 
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-right page-archive">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-right page-post-detail">
     <div class="headband"></div>
     <a href="https://github.com/LeoWood" class="github-corner" aria-label="View source on Github"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
 
@@ -248,74 +252,215 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
-
-      <span class="archive-page-counter">
-        
-        
-        
-          
-        
-        嗯..! 目前共计 8 篇日志。 继续努力。
-      </span>
-
-      
-
-        
-        
-        
-
-        
-          
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2018">2018</h1>
-          </div>
-        
-        
-
-        
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/08/windows-server-2012-r2-安装docker/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Leo Wood">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/hepburn.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="依依东望">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2018/07/05/基于Attention机制的Bi-LSTM关系抽取-分类-读书报告/" itemprop="url">
-              
-                <span itemprop="name">基于Attention机制的Bi-LSTM关系抽取(分类)读书报告</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">windows server 2012 r2 安装docker</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-07-05T14:25:10+08:00"
-              content="2018-07-05" >
-          07-05
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-08T16:40:42+08:00">
+                2018-11-08
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Systenms/" itemprop="url" rel="index">
+                    <span itemprop="name">Systenms</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 浏览
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  195
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
+      
 
+      
+        <blockquote>
+<p>前期为了做实体识别，尝试调用DBpedia-spotlight API，发现API限制访问的情况很严重，只好考虑使用离线版。在谷歌找到了使用Docker<a href="https://hub.docker.com/r/dbpedia/spotlight-english/" target="_blank" rel="noopener">创建本地版DBpedia-spotlight API的方法</a>，于是开始探索在Windows Server 2012 R2 安装Docker。</p>
+</blockquote>
+<a id="more"></a>
+<p><a href="https://docs.docker.com/docker-for-windows/install/" target="_blank" rel="noopener">Docker</a> 目前只支持在最新版的windows10或者Windows Server 2016，其他windows系统需要使用<a href="https://docs.docker.com/toolbox/toolbox_install_windows/" target="_blank" rel="noopener">Dokerbox</a>安装。</p>
+<p>安装过程按照链接中的指示一步步做就可以，但是到Step3，出现了和官网不一样的结果。点击Docker QuickStart之后，出现了错误：”error with pre-create check…”，于是按照<a href="https://forums.docker.com/t/pre-create-check-failed-when-first-time-launch-docker-quickstart-terminal/9977/2" target="_blank" rel="noopener">这个地址</a>的提示，重新下载了<a href="https://github.com/boot2docker/boot2docker/releases" target="_blank" rel="noopener">boot2docker.iso</a>，然后将c:\user\USERNAME.docker\machine\cache目录中的文件替换掉，重新打开Docker QuickStart，大功告成！</p>
+<p><img src="\images\docker.png" alt=""></p>
+
+      
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/教程/" rel="tag"><i class="fa fa-tag"></i> 教程</a>
+          
+            <a href="/tags/环境配置/" rel="tag"><i class="fa fa-tag"></i> 环境配置</a>
+          
+            <a href="/tags/Docker/" rel="tag"><i class="fa fa-tag"></i> Docker</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/08/01/TensorFlow爬坑笔记（一）模型读取与调用/" rel="next" title="TensorFlow爬坑笔记（一）模型读取与调用">
+                <i class="fa fa-chevron-left"></i> TensorFlow爬坑笔记（一）模型读取与调用
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -323,6 +468,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -626,11 +775,15 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 
 
@@ -683,26 +836,6 @@
   
 
   
-  
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-          processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
-      });
-    </script>
-
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-          all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-      });
-    </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 

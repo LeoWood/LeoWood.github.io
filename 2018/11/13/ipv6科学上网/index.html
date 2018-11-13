@@ -88,7 +88,7 @@
 <meta property="og:description" content="利用教育科研网的ipv6功能，科学上网。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/images/ipv6.png">
-<meta property="og:updated_time" content="2018-11-13T08:36:56.377Z">
+<meta property="og:updated_time" content="2018-11-13T08:48:18.256Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ipv6科学上网">
 <meta name="twitter:description" content="利用教育科研网的ipv6功能，科学上网。">
@@ -400,18 +400,18 @@
 <p><img src="\images\ipv6.png" alt=""></p>
 <p>否则，到此为止。（无线网路由器一般很少有支持ipv6的，一般需要交换机，教育科研机构的有线网基本都支持）</p>
 <blockquote>
-<p>思路</p>
+<p><strong>思路</strong> </p>
 </blockquote>
 <p>修改hosts文件，将ipv4网络无法访问的网址指向ipv6地址。</p>
 <p>这样做的好处是简单、安全、免费。</p>
 <p>缺点是只能访问hosts文件指定的网址，其他网址无法访问。</p>
 <blockquote>
-<p>ipv6-hosts地址</p>
+<p><strong>ipv6-hosts地址</strong> </p>
 </blockquote>
 <p><a href="https://github.com/lennylxx/ipv6-hosts" target="_blank" rel="noopener">https://github.com/lennylxx/ipv6-hosts</a></p>
 <p>github中长期维护的项目，打开其中的hosts文件，View Raw即可</p>
 <blockquote>
-<p>windows系统修改hosts文件方法</p>
+<p><strong>windows系统修改hosts文件方法</strong> </p>
 </blockquote>
 <p>windows搜索框输入 notepad或记事本，选中windows自带记事本，右键-以管理员身份运行。</p>
 <p>在打开的记事本页面，文件-打开，然后选择C盘-Windows-System32-drivers-etc</p>
@@ -421,7 +421,7 @@
 <p>这时，点击保存，不出意外，你已经成功了。</p>
 <p>但是，意外也许发生。<strong>有一种情况是，你发现无法保存，系统一直让你另存为一个文件，这是因为你的hosts文件被设置成只读模式。</strong>这时只需要找到那个hosts文件，右键-属性，将只读的选项去掉勾就行。</p>
 <blockquote>
-<p>Tips</p>
+<p><strong>Tips</strong> </p>
 </blockquote>
 <p>上面github中的hosts文件里面包括了谷歌翻译的地址（谷歌翻译使用ipv4也可以访问），因此，当你的电脑又切换至ipv4网络时，可能导致谷歌翻译无法访问的情况。</p>
 <p>因此，建议在hosts文件中，Ctrl+F，搜索translate，找到谷歌翻译的所有地址，在前面加#注释。</p>

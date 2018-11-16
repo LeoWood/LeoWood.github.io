@@ -90,7 +90,7 @@
 <meta property="og:image" content="http://yoursite.com/images/train_tsv.png">
 <meta property="og:image" content="http://yoursite.com/images/dev_tsv.png">
 <meta property="og:image" content="http://yoursite.com/images/test_tsv.png">
-<meta property="og:updated_time" content="2018-11-16T08:55:22.850Z">
+<meta property="og:updated_time" content="2018-11-16T09:29:51.492Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="BERT模型fine-tuning代码解析（一）">
 <meta name="twitter:description" content="BERT模型fine-tuning过程代码实战，以run_classifier.py为例。">
@@ -367,7 +367,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,788
+                  1,754
                 </span>
               
 
@@ -433,7 +433,7 @@
 <p>可以发现这个processor就是用来对data_dir中输入的数据进行预处理的。<br>同时也能发现，在data_dir中我们需要将数据处理成.tsv格式，训练集、开发集和测试集分别是train.tsv, dev.tsv, test.tsv，这里我们暂时只使用train.tsv和dev.tsv。另外，label在get_labels()设定，如果是二分类，则将label设定为[“0”,”1”]，同时_create_examples()中，给定了如何获取guid以及如何给text_a, text_b和label赋值。 </p>
 <p>到这里，似乎已经明白了什么。<strong>对于这个fine-tuning过程，我们要做的只是：</strong> </p>
 <ul>
-<li><p>准备好一个12G显存左右的GPU，没有也不用担心，下一期会讲如何使用谷歌免费的GPU</p>
+<li><p>准备好一个12G显存左右的GPU，没有也不用担心，可以使用谷歌免费的GPU</p>
 </li>
 <li><p>准备好train.tsv, dev.tsv以及test.tsv</p>
 </li>
@@ -477,7 +477,7 @@
 <li>max_seq_length、train_batch_size可以根据自己的设备情况适当调整，目前默认的参数在GTX 1080Ti 以及谷歌Colab提供的免费GPU Tesla K80中经过测试，完美运行。</li>
 <li>关于预训练模型，官方给出了两种模型，Large和Base，具体可以看Github介绍以及论文，目前上面的两种设备经过多次测试，只能支持Base模型，Large模型显然需要更大显存的机器（TPU）。</li>
 </ul>
-<p>探索了很久，上面谷歌给出的这种运行方式，好像只有谷歌的Colab可以完美支持，其他的终端或多或少都会出现问题。于是又回到这个问题，下一期，讲一讲如何利用谷歌的Colab进行BERT模型的fine-tuning。</p>
+<p>探索了很久，上面谷歌给出的这种运行方式，好像只有谷歌的Colab可以完美支持，其他的终端或多或少都会出现问题。</p>
 <p>以上。</p>
 
       

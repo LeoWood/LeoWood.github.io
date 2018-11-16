@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/stark.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="NLP，BERT,Tensorflow," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="BERT模型fine-tuning过程代码实战，以run_classifier.py为例。">
+<meta name="keywords" content="NLP，BERT,Tensorflow">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BERT模型fine-tuning代码解析（一）">
+<meta property="og:url" content="http://yoursite.com/2018/11/16/BERT模型fine-tuning代码解析（一）/index.html">
+<meta property="og:site_name" content="依依东望">
+<meta property="og:description" content="BERT模型fine-tuning过程代码实战，以run_classifier.py为例。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="d:/Projects/MyBlog/Hexo/source/images/train_tsv.png">
+<meta property="og:image" content="d:/Projects/MyBlog/Hexo/source/images/dev_tsv.png">
+<meta property="og:image" content="d:/Projects/MyBlog/Hexo/source/images/test_tsv.png">
+<meta property="og:updated_time" content="2018-11-16T08:54:08.250Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="BERT模型fine-tuning代码解析（一）">
+<meta name="twitter:description" content="BERT模型fine-tuning过程代码实战，以run_classifier.py为例。">
+<meta name="twitter:image" content="d:/Projects/MyBlog/Hexo/source/images/train_tsv.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/11/16/BERT模型fine-tuning代码解析（一）/"/>
+
+
+
+
+
+  <title>BERT模型fine-tuning代码解析（一） | 依依东望</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/LeoWood" class="github-corner" aria-label="View source on Github"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">依依东望</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Dance in the rain.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/16/BERT模型fine-tuning代码解析（一）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Leo Wood">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/hepburn.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="依依东望">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">BERT模型fine-tuning代码解析（一）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-16T15:07:34+08:00">
+                2018-11-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python编程/" itemprop="url" rel="index">
+                    <span itemprop="name">Python编程</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python编程/深度学习/" itemprop="url" rel="index">
+                    <span itemprop="name">深度学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 浏览
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1,788
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  8
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>BERT模型fine-tuning过程代码实战，以run_classifier.py为例。</p>
+</blockquote>
+<a id="more"></a>
+<p>BERT官方Github地址：<a href="https://github.com/google-research/bert" target="_blank" rel="noopener">https://github.com/google-research/bert</a> ，其中对BERT模型进行了详细的介绍，更详细的可以查阅原文献：<a href="https://arxiv.org/abs/1810.04805" target="_blank" rel="noopener">https://arxiv.org/abs/1810.04805</a> 。</p>
+<p>BERT本质上是一个两段式的NLP模型。第一个阶段叫做：Pre-training，跟WordEmbedding类似，利用现有无标记的语料训练一个语言模型。第二个阶段叫做：Fine-tuning，利用预训练好的语言模型，完成具体的NLP下游任务。</p>
+<p>Google已经投入了大规模的语料和昂贵的机器帮我们完成了Pre-training过程，这里介绍一下不那么expensive的fine-tuning过程。</p>
+<p>回到Github中的代码，只有run_classifier.py和run_squad.py是用来做fine-tuning 的，其他的可以暂时先不管。这里使用run_classifier.py进行句子分类任务。</p>
+<h3 id="代码解析"><a href="#代码解析" class="headerlink" title="代码解析"></a>代码解析</h3><p>从主函数开始，可以发现它指定了必须的参数：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">  flags.mark_flag_as_required(<span class="string">"data_dir"</span>)</span><br><span class="line">  flags.mark_flag_as_required(<span class="string">"task_name"</span>)</span><br><span class="line">  flags.mark_flag_as_required(<span class="string">"vocab_file"</span>)</span><br><span class="line">  flags.mark_flag_as_required(<span class="string">"bert_config_file"</span>)</span><br><span class="line">  flags.mark_flag_as_required(<span class="string">"output_dir"</span>)</span><br><span class="line">  tf.app.run()</span><br></pre></td></tr></table></figure>
+<p>从这些参数出发，可以对run_classifier.py进行探索：</p>
+<blockquote>
+<p><strong>data_dir</strong> </p>
+</blockquote>
+<p>指的是我们的输入数据的文件夹路径。查看代码，不难发现，作者给出了输入数据的格式：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">InputExample</span><span class="params">(object)</span>:</span></span><br><span class="line">  <span class="string">"""A single training/test example for simple sequence classification."""</span></span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, guid, text_a, text_b=None, label=None)</span>:</span></span><br><span class="line">    <span class="string">"""Constructs a InputExample.</span></span><br><span class="line"><span class="string">    Args:</span></span><br><span class="line"><span class="string">      guid: Unique id for the example.</span></span><br><span class="line"><span class="string">      text_a: string. The untokenized text of the first sequence. For single</span></span><br><span class="line"><span class="string">        sequence tasks, only this sequence must be specified.</span></span><br><span class="line"><span class="string">      text_b: (Optional) string. The untokenized text of the second sequence.</span></span><br><span class="line"><span class="string">        Only must be specified for sequence pair tasks.</span></span><br><span class="line"><span class="string">      label: (Optional) string. The label of the example. This should be</span></span><br><span class="line"><span class="string">        specified for train and dev examples, but not for test examples.</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    self.guid = guid</span><br><span class="line">    self.text_a = text_a</span><br><span class="line">    self.text_b = text_b</span><br><span class="line">    self.label = label</span><br></pre></td></tr></table></figure>
+<p>可以发现它要求的输入分别是guid, text_a, text_b, label，其中text_b和label为可选参数。例如我们要做的是单个句子的分类任务，那么就不需要输入text_b；另外，在test样本中，我们便不需要输入lable。 </p>
+<blockquote>
+<p><strong>task_name</strong> </p>
+</blockquote>
+<p>这里的task_name，一开始可能不好理解它是用来做什么的。仔细查看代码可以发现：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">processors = &#123;</span><br><span class="line">    <span class="string">"cola"</span>: ColaProcessor,</span><br><span class="line">    <span class="string">"mnli"</span>: MnliProcessor,</span><br><span class="line">    <span class="string">"mrpc"</span>: MrpcProcessor,</span><br><span class="line">    <span class="string">"xnli"</span>: XnliProcessor,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">task_name = FLAGS.task_name.lower()</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> task_name <span class="keyword">not</span> <span class="keyword">in</span> processors:</span><br><span class="line">    <span class="keyword">raise</span> ValueError(<span class="string">"Task not found: %s"</span> % (task_name))</span><br><span class="line"></span><br><span class="line">processor = processors[task_name]()</span><br></pre></td></tr></table></figure>
+<p>task_name是用来选择processor的。</p>
+<p>继续查看processor，这里以“mrpc”为例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MrpcProcessor</span><span class="params">(DataProcessor)</span>:</span></span><br><span class="line">  <span class="string">"""Processor for the MRPC data set (GLUE version)."""</span></span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">get_train_examples</span><span class="params">(self, data_dir)</span>:</span></span><br><span class="line">    <span class="string">"""See base class."""</span></span><br><span class="line">    <span class="keyword">return</span> self._create_examples(</span><br><span class="line">        self._read_tsv(os.path.join(data_dir, <span class="string">"train.tsv"</span>)), <span class="string">"train"</span>)</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">get_dev_examples</span><span class="params">(self, data_dir)</span>:</span></span><br><span class="line">    <span class="string">"""See base class."""</span></span><br><span class="line">    <span class="keyword">return</span> self._create_examples(</span><br><span class="line">        self._read_tsv(os.path.join(data_dir, <span class="string">"dev.tsv"</span>)), <span class="string">"dev"</span>)</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">get_test_examples</span><span class="params">(self, data_dir)</span>:</span></span><br><span class="line">    <span class="string">"""See base class."""</span></span><br><span class="line">    <span class="keyword">return</span> self._create_examples(</span><br><span class="line">        self._read_tsv(os.path.join(data_dir, <span class="string">"test.tsv"</span>)), <span class="string">"test"</span>)</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">get_labels</span><span class="params">(self)</span>:</span></span><br><span class="line">    <span class="string">"""See base class."""</span></span><br><span class="line">    <span class="keyword">return</span> [<span class="string">"0"</span>, <span class="string">"1"</span>]</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">_create_examples</span><span class="params">(self, lines, set_type)</span>:</span></span><br><span class="line">    <span class="string">"""Creates examples for the training and dev sets."""</span></span><br><span class="line">    examples = []</span><br><span class="line">    <span class="keyword">for</span> (i, line) <span class="keyword">in</span> enumerate(lines):</span><br><span class="line">      <span class="keyword">if</span> i == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">continue</span></span><br><span class="line">      guid = <span class="string">"%s-%s"</span> % (set_type, i)</span><br><span class="line">      text_a = tokenization.convert_to_unicode(line[<span class="number">3</span>])</span><br><span class="line">      text_b = tokenization.convert_to_unicode(line[<span class="number">4</span>])</span><br><span class="line">      <span class="keyword">if</span> set_type == <span class="string">"test"</span>:</span><br><span class="line">        label = <span class="string">"0"</span></span><br><span class="line">      <span class="keyword">else</span>:</span><br><span class="line">        label = tokenization.convert_to_unicode(line[<span class="number">0</span>])</span><br><span class="line">      examples.append(</span><br><span class="line">          InputExample(guid=guid, text_a=text_a, text_b=text_b, label=label))</span><br><span class="line">    <span class="keyword">return</span> examples</span><br></pre></td></tr></table></figure>
+<p>可以发现这个processor就是用来对data_dir中输入的数据进行预处理的。<br>同时也能发现，在data_dir中我们需要将数据处理成.tsv格式，训练集、开发集和测试集分别是train.tsv, dev.tsv, test.tsv，这里我们暂时只使用train.tsv和dev.tsv。另外，label在get_labels()设定，如果是二分类，则将label设定为[“0”,”1”]，同时_create_examples()中，给定了如何获取guid以及如何给text_a, text_b和label赋值。 </p>
+<p>到这里，似乎已经明白了什么。<strong>对于这个fine-tuning过程，我们要做的只是：</strong> </p>
+<ul>
+<li><p>准备好一个12G显存左右的GPU，没有也不用担心，下一期会讲如何使用谷歌免费的GPU</p>
+</li>
+<li><p>准备好train.tsv, dev.tsv以及test.tsv</p>
+</li>
+<li>新建一个跟自己task_name对应的processor，用于将train.tsv、dev.tsv以及test.tsv中的数据提取出来赋给text_a, text_b, label</li>
+<li>下载好Pre-training模型，设定好相关参数，run就完事了</li>
+</ul>
+<blockquote>
+<p>“vocab_file”, “bert_config_file”以及”output_dir”很好理解，分别是BERT预训练模型的路径和fine-tuning过程输出的路径</p>
+</blockquote>
+<h3 id="fine-tuning实践"><a href="#fine-tuning实践" class="headerlink" title="fine-tuning实践"></a>fine-tuning实践</h3><blockquote>
+<p><strong>准备好train.tsv, dev.tsv以及test.tsv</strong> </p>
+</blockquote>
+<p>tsv，看上去怪怪的。其实好像跟csv没有多大区别，反正把后缀改一改就完事。这里我要做的是一个4分类，示例在下面：</p>
+<p>train.tsv: （标签+’\t’+句子）</p>
+<p><img src="D:\Projects\MyBlog\Hexo\source\images\train_tsv.png" alt="train.tsv"></p>
+<p>dev.tsv:（标签+’\t’+句子）</p>
+<p><img src="D:\Projects\MyBlog\Hexo\source\images\dev_tsv.png" alt="dev.tsv"></p>
+<p>test.tsv:（句子）</p>
+<p><img src="D:\Projects\MyBlog\Hexo\source\images\test_tsv.png" alt="1542355007071"></p>
+<blockquote>
+<p><strong>新建processor</strong> </p>
+</blockquote>
+<p>这里我将自己的句子分类任务命名为”bert_move”：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">processors = &#123;</span><br><span class="line">      <span class="string">"cola"</span>: ColaProcessor,</span><br><span class="line">      <span class="string">"mnli"</span>: MnliProcessor,</span><br><span class="line">      <span class="string">"mrpc"</span>: MrpcProcessor,</span><br><span class="line">      <span class="string">"xnli"</span>: XnliProcessor,</span><br><span class="line">      <span class="string">"bert_move"</span>: MoveProcessor</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>然后仿照MrpcProcessor创建自己的MoveProcessor：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MoveProcessor</span><span class="params">(DataProcessor)</span>:</span></span><br><span class="line">  <span class="string">"""Processor for the move data set ."""</span></span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">get_train_examples</span><span class="params">(self, data_dir)</span>:</span></span><br><span class="line">    <span class="string">"""See base class."""</span></span><br><span class="line">    <span class="keyword">return</span> self._create_examples(</span><br><span class="line">        self._read_tsv(os.path.join(data_dir, <span class="string">"train.tsv"</span>)), <span class="string">"train"</span>)</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">get_dev_examples</span><span class="params">(self, data_dir)</span>:</span></span><br><span class="line">    <span class="string">"""See base class."""</span></span><br><span class="line">    <span class="keyword">return</span> self._create_examples(</span><br><span class="line">        self._read_tsv(os.path.join(data_dir, <span class="string">"dev.tsv"</span>)), <span class="string">"dev"</span>)</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">get_test_examples</span><span class="params">(self, data_dir)</span>:</span></span><br><span class="line">    <span class="string">"""See base class."""</span></span><br><span class="line">    <span class="keyword">return</span> self._create_examples(</span><br><span class="line">        self._read_tsv(os.path.join(data_dir, <span class="string">"test.tsv"</span>)), <span class="string">"test"</span>)</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">get_labels</span><span class="params">(self)</span>:</span></span><br><span class="line">    <span class="string">"""See base class."""</span></span><br><span class="line">    <span class="keyword">return</span> [<span class="string">"0"</span>, <span class="string">"1"</span>, <span class="string">"2"</span>, <span class="string">"3"</span>]</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">_create_examples</span><span class="params">(self, lines, set_type)</span>:</span></span><br><span class="line">    <span class="string">"""Creates examples for the training and dev sets."""</span></span><br><span class="line">    examples = []</span><br><span class="line">    <span class="keyword">for</span> (i, line) <span class="keyword">in</span> enumerate(lines):</span><br><span class="line">      guid = <span class="string">"%s-%s"</span> % (set_type, i)</span><br><span class="line">      <span class="keyword">if</span> set_type == <span class="string">"test"</span>:</span><br><span class="line">        text_a = tokenization.convert_to_unicode(line[<span class="number">0</span>])</span><br><span class="line">        label = <span class="string">"0"</span></span><br><span class="line">      <span class="keyword">else</span>:</span><br><span class="line">        text_a = tokenization.convert_to_unicode(line[<span class="number">1</span>])</span><br><span class="line">        label = tokenization.convert_to_unicode(line[<span class="number">0</span>])</span><br><span class="line">      examples.append(</span><br><span class="line">          InputExample(guid=guid, text_a=text_a, text_b=<span class="keyword">None</span>, label=label))</span><br><span class="line">    <span class="keyword">return</span> examples</span><br></pre></td></tr></table></figure>
+<p>其中，主要修改的是:</p>
+<ul>
+<li>get_labels()中设置4分类的标签[‘1’, ‘2’,’3’,’4’]</li>
+<li>_create_examples()中提取文本赋给text_a和label，并做一个判断，当文件名是test.tsv时，只赋给text_a，label直接给0</li>
+<li>guid则为自动生成</li>
+</ul>
+<blockquote>
+<p><strong>设定参数，运行fine-tuning</strong> </p>
+</blockquote>
+<p>相关的参数可以直接在run_classifier.py中一开始的flags里面直接做修改，然后运行就行。但是又研究了一下Github里面设置参数的方式：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">python run_classifier.py \</span><br><span class="line">  --task_name=MRPC \</span><br><span class="line">  --do_train=<span class="literal">true</span> \</span><br><span class="line">  --do_eval=<span class="literal">true</span> \</span><br><span class="line">  --data_dir=<span class="variable">$GLUE_DIR</span>/MRPC \</span><br><span class="line">  --vocab_file=<span class="variable">$BERT_BASE_DIR</span>/vocab.txt \</span><br><span class="line">  --bert_config_file=<span class="variable">$BERT_BASE_DIR</span>/bert_config.json \</span><br><span class="line">  --init_checkpoint=<span class="variable">$BERT_BASE_DIR</span>/bert_model.ckpt \</span><br><span class="line">  --max_seq_length=128 \</span><br><span class="line">  --train_batch_size=32 \</span><br><span class="line">  --learning_rate=2e-5 \</span><br><span class="line">  --num_train_epochs=3.0 \</span><br><span class="line">  --output_dir=/tmp/mrpc_output/</span><br></pre></td></tr></table></figure>
+<p>对其中的一些参数做一些解释：</p>
+<ul>
+<li>do_train, do_eval和do_test至少要有一个是True，一般做fine-tuning训练时，将do_train和do_eval设置为True，do_test设置为False(默认)，当模型都训练好了，就可以只将do_test设置为True，将会自动调用保存在output_dir中已经训练好的模型，进行测试。</li>
+<li>max_seq_length、train_batch_size可以根据自己的设备情况适当调整，目前默认的参数在GTX 1080Ti 以及谷歌Colab提供的免费GPU Tesla K80中经过测试，完美运行。</li>
+<li>关于预训练模型，官方给出了两种模型，Large和Base，具体可以看Github介绍以及论文，目前上面的两种设备经过多次测试，只能支持Base模型，Large模型显然需要更大显存的机器（TPU）。</li>
+</ul>
+<p>探索了很久，上面谷歌给出的这种运行方式，好像只有谷歌的Colab可以完美支持，其他的终端或多或少都会出现问题。于是又回到这个问题，下一期，讲一讲如何利用谷歌的Colab进行BERT模型的fine-tuning。</p>
+<p>以上。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/NLP，BERT/" rel="tag"><i class="fa fa-tag"></i> NLP，BERT</a>
+          
+            <a href="/tags/Tensorflow/" rel="tag"><i class="fa fa-tag"></i> Tensorflow</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/11/13/ipv6科学上网/" rel="next" title="ipv6科学上网">
+                <i class="fa fa-chevron-left"></i> ipv6科学上网
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/hepburn.png"
+                alt="Leo Wood" />
+            
+              <p class="site-author-name" itemprop="name">Leo Wood</p>
+              <p class="site-description motion-element" itemprop="description">潜沉涵泳</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/LeoWood" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:leowood@foxmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                推荐阅读
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.jianshu.com/u/68f0c30bb0f1" title="简书" target="_blank">简书</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://blog.csdn.net/alanconstantinelau" title="AlanConstantineLau" target="_blank">AlanConstantineLau</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#代码解析"><span class="nav-number">1.</span> <span class="nav-text">代码解析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#fine-tuning实践"><span class="nav-number">2.</span> <span class="nav-text">fine-tuning实践</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+
+<!--  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>-->
+
+  <span class="author" itemprop="copyrightHolder">❤ Leo Wood</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">10.4k</span>
+  
+</div>
+
+<!--
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>&nbsp;&nbsp;|&nbsp;&nbsp;
+</span>
+</div>
+-->
+
+<!--下面三段，分别是Powered by Hexo | 主题
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+-->
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> 访客人数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i> 总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+
+  
+</body>
+</html>
+<script type="text/javascript" src="/js/src/love.js"></script>

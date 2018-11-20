@@ -93,7 +93,7 @@
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/5759501-c5fa43f51e6339eb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/5759501-92464313ba4cba7a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/5759501-00d99dc97d831f12.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2018-05-21T08:42:45.585Z">
+<meta property="og:updated_time" content="2018-11-20T07:38:32.201Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python爬虫 抓取大数据岗位招聘信息（51job为例）">
 <meta name="twitter:description" content="简单介绍一下爬虫原理。并给出 51job网站完整的爬虫方案。">
@@ -425,7 +425,7 @@
 </blockquote>
 <p>webdriver是一个用来进行复杂重复的web自动化测试的工具，能够使用chrome、firefox、IE浏览器进行web测试，可以模拟用户点击链接，填写表单，点击按钮等。因此，相对于requests库来说，webdriver在模拟浏览器鼠标点击滑动等事件上有着天然的优势，并且真实模拟了浏览器的操作，不易被反爬虫机制发现，因此是一个很好用的爬虫工具。当然，其缺点在于速度较慢，效率不高。</p>
 <p>webdriver安装：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ pip install selnium</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ pip install selenium</span><br></pre></td></tr></table></figure>
 <p>除了安装selnium库，webdriver的运行还需要进行浏览器驱动的配置。Chrome、火狐和IE浏览器都有其配置方式，具体方法查看 <a href="http://blog.163.com/yang_jianli/blog/static/1619900062014102833427464/" target="_blank" rel="noopener">链接</a>。</p>
 <p>这里以IE浏览器为例，做一个简单的示范：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> selenium <span class="keyword">import</span> webdriver</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line">iedriver = <span class="string">"IEDriverServer.exe"</span></span><br><span class="line">os.environ[<span class="string">"webdriver.ie.driver"</span>] = iedriver</span><br><span class="line">driver = webdriver.Ie(iedriver)</span><br></pre></td></tr></table></figure>

@@ -91,7 +91,7 @@
 <meta property="og:image" content="http://yoursite.com/images/google_auth.png">
 <meta property="og:image" content="http://yoursite.com/images/ls_cmd.png">
 <meta property="og:image" content="http://yoursite.com/images/bert_models.png">
-<meta property="og:updated_time" content="2018-11-16T12:39:43.737Z">
+<meta property="og:updated_time" content="2018-11-22T08:24:13.269Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用Google免费GPU进行BERT模型fine-tuning">
 <meta name="twitter:description" content="使用Google Colab中自带的免费GPU进行BERT fine-tuning。">
@@ -363,7 +363,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  711
+                  927
                 </span>
               
 
@@ -379,7 +379,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  3
+                  4
                 </span>
               
             </div>
@@ -411,9 +411,12 @@
 <p><strong>如果在更多栏里没有发现Colaboratory，选择关联更多应用，搜索Colaboratory，选择关联。</strong> </p>
 <p>创建完成后，会生成一个jupyter笔记本。</p>
 <p>选择 修改-笔记本设置，将硬件加速器设置为GPU。</p>
+<p>到这里，Google Colab已经配置完成，相当于一个远程的终端，我们可以在上面运行一些linux命令以及python代码，但是要调用谷歌云盘上面的数据和代码，还需要更多的配置。</p>
 <h3 id="程序运行"><a href="#程序运行" class="headerlink" title="程序运行"></a>程序运行</h3><p>每次重新打开笔记本运行程序时，都要进行以下几步：</p>
 <ul>
-<li>安装相关库以及授权：</li>
+<li><p>安装相关库以及授权：</p>
+<p>该步骤是为了建立笔记本与谷歌云盘的关联，具体来说就是给这个笔记本授权，使其能够访问你的谷歌云盘上面的文件。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">!apt-get install -y -qq software-properties-common python-software-properties module-init-tools</span><br><span class="line">!add-apt-repository -y ppa:alessandro-strada/ppa 2&gt;&amp;1 &gt; /dev/null</span><br><span class="line">!apt-get update -qq 2&gt;&amp;1 &gt; /dev/null</span><br><span class="line">!apt-get -y install -qq google-drive-ocamlfuse fuse</span><br><span class="line">from google.colab import auth</span><br><span class="line">auth.authenticate_user()</span><br><span class="line">from oauth2client.client import GoogleCredentials</span><br><span class="line">creds = GoogleCredentials.get_application_default()</span><br><span class="line">import getpass</span><br><span class="line">!google-drive-ocamlfuse -headless -id=&#123;creds.client_id&#125; -secret=&#123;creds.client_secret&#125; &lt; /dev/null 2&gt;&amp;1 | grep URL</span><br><span class="line">vcode = getpass.getpass()</span><br><span class="line">!<span class="built_in">echo</span> &#123;vcode&#125; | google-drive-ocamlfuse -headless -id=&#123;creds.client_id&#125; -secret=&#123;creds.client_secret&#125;</span><br></pre></td></tr></table></figure>
 <p>运行后，会出现链接，点开链接，选择自己的谷歌账号，将得到的代码输入链接下面的框中即可。</p>
@@ -431,7 +434,10 @@
 <p>可以用ls命令查看是否成功：</p>
 <p><img src="\images\ls_cmd.png" alt="1542371623670"></p>
 <ul>
-<li>运行run_classifier.py</li>
+<li><p>运行run_classifier.py</p>
+<p>使用命令直接运行位于云盘中的py文件，注意不要丢掉前面的感叹号。</p>
+<p><strong>这里的\表示换行，如果py文件里面已经设置好了相关参数，下面参数可以不要。一旦选择用如下的方式进行参数设置，py文件中的FLAG参数设置必须都是默认参数，否则可能引起报错。</strong></p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">!python run_classifier.py \</span><br><span class="line">  --task_name=bert_move \</span><br><span class="line">  --do_train=<span class="literal">true</span> \</span><br><span class="line">  --do_eval=<span class="literal">true</span> \</span><br><span class="line">  --data_dir=data \</span><br><span class="line">  --vocab_file=gs://cloud-tpu-checkpoints/bert/uncased_L-24_H-1024_A-16/vocab.txt \</span><br><span class="line">  --bert_config_file=gs://cloud-tpu-checkpoints/bert/uncased_L-24_H-1024_A-16/bert_config.json \</span><br><span class="line">  --init_checkpoint=gs://cloud-tpu-checkpoints/bert/uncased_L-24_H-1024_A-16/bert_model.ckpt \</span><br><span class="line">  --max_seq_length=128 \</span><br><span class="line">  --train_batch_size=4 \</span><br><span class="line">  --learning_rate=2e-5 \</span><br><span class="line">  --num_train_epochs=3.0 \</span><br><span class="line">  --output_dir=output \</span><br></pre></td></tr></table></figure>
 <p>其中gs://cloud-tpu-checkpoints/bert/uncased_L-12_H-768_A-12，是谷歌云中保存的bert预训练模型，我们无需自己上传，目前一共有：</p>
@@ -691,7 +697,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">11.1k</span>
+    <span title="Site words total count">11.3k</span>
   
 </div>
 
